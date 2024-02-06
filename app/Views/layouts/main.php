@@ -19,12 +19,41 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
-<script>
+<!-- <script>
     $(document).ready(function () {
         <?php if(session()->getFlashdata('status')){ ?>
         alertify.set('notifier','position', 'top-center');
         alertify.success('<?= session()->getFlashdata('status') ?>');
         <?php } ?>
+    });
+</script> -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    $(document).ready(function () {
+        <?php if(session()->getFlashdata('status')){ ?>
+            Swal.fire({
+                title: "<?= session()->getFlashdata('status') ?>",
+                text: "<?= session()->getFlashdata('status_text') ?>",
+                icon: "<?= session()->getFlashdata('status_icon') ?>",
+                button: "OK"
+            });
+        <?php } ?>
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        swal({
+            title: "Are you sure?",
+            text: "You will not be able to recover this imaginary file!",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonClass: "btn-danger",
+            confirmButtonText: "Yes, delete it!",
+            closeOnConfirm: false
+    },
+        function(){
+        swal("Deleted!", "Your imaginary file has been deleted.", "success");
+        });
     });
 </script>
 </body>
