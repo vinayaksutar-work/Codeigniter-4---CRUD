@@ -55,9 +55,15 @@ class StudentController extends BaseController
     {
         $student = new StudentModel();
         $student->delete($id);
-        session()->setFlashdata('status_text', 'Your student Data has been deleted');
-        return redirect()->back()
-            ->with('status_icon', 'error')
-            ->with('status', 'Student Deleted Successfully!!!');
+        // session()->setFlashdata('status_text', 'Your student Data has been deleted');
+        // return redirect()->back()
+        //     ->with('status_icon', 'error')
+        //     ->with('status', 'Student Deleted Successfully!!!');
+        $data = [
+            'status' => "Deleted Successfully!!!",
+            'status_text' => "Your status data han been deleted successfully",
+            'status_icon' => 'success',
+        ];
+        return $this->response->setJSON($data);
     }
 }
