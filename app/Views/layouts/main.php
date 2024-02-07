@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
 <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="//cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
 <title>Codeigniter 4</title>
 </head>
 <body>
@@ -19,6 +20,12 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+<script src="//cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#myDataTable').DataTable();
+    });
+</script>
 <!-- <script>
     $(document).ready(function () {
         <?php if(session()->getFlashdata('status')){ ?>
@@ -27,6 +34,7 @@
         <?php } ?>
     });
 </script> -->
+
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     $(document).ready(function () {
@@ -42,17 +50,38 @@
 </script>
 <script>
     $(document).ready(function () {
-        swal({
-            title: "Are you sure?",
-            text: "You will not be able to recover this imaginary file!",
-            type: "warning",
-            showCancelButton: true,
-            confirmButtonClass: "btn-danger",
-            confirmButtonText: "Yes, delete it!",
-            closeOnConfirm: false
-    },
-        function(){
-        swal("Deleted!", "Your imaginary file has been deleted.", "success");
+        $('.confirm_delete_btn').click(function (e) { 
+            e.preventDefault();
+            var id = $(this).val();
+            swal({
+                title: "Are you sure?",
+                text: "Once deleted, You will not be able to recover this imaginary file!",
+                type: "warning",
+                buttons: true,
+                dangerMode: true,
+                })
+                .then((willDelete) => {
+                    if(willDelete)
+                    {
+                        $.ajax({
+                            url: "student/confirm-delete/"+id,
+                            success: function(response){
+                                swal({
+                                    title: response.status,
+                                    text: response.status_text,
+                                    icon: response.status_icon,
+                                    button: "OK"
+                                    }).then((confirmed) =>{
+                                        window.location.reload();
+                                    });
+                                }
+                        });
+                    }
+                    else
+                    {
+                        swal("You have canceled on deleting this data");
+                    }
+            });
         });
     });
 </script>
