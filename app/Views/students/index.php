@@ -46,7 +46,7 @@
                                             <td><?= $row['course']; ?></td>
                                             <td>
                                                 <a href="<?= base_url('student/edit/'.$row['id'])?>" class="btn btn-success btn-sm ">Update</a>
-                                                <a href="<?= base_url('student/delete/'.$row['id'])?>" class="Delete_Btn btn btn-danger btn-sm ">Delete</a>
+                                                <a href="<?= base_url('student/delete/'.$row['id'])?>" class="confirm_delete_btn btn btn-danger btn-sm ">Delete</a>
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>
