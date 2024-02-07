@@ -24,7 +24,7 @@
                 </div>
                 <div class="card-body p-lg-5 ">
                     <div class="table-responsive">
-                        <table class="table table-bordered text-center ">
+                        <table class="table table-bordered text-center " id="myDataTable">
                             <thead class="thead-light">
                                 <tr>
                                     <th>ID</th>
