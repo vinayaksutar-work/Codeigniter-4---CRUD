@@ -48,42 +48,5 @@
         <?php } ?>
     });
 </script>
-<script>
-    $(document).ready(function () {
-        $('.confirm_delete_btn').click(function (e) { 
-            e.preventDefault();
-            var id = $(this).val();
-            swal({
-                title: "Are you sure?",
-                text: "Once deleted, You will not be able to recover this imaginary file!",
-                type: "warning",
-                buttons: true,
-                dangerMode: true,
-                })
-                .then((willDelete) => {
-                    if(willDelete)
-                    {
-                        $.ajax({
-                            url: "student/confirm-delete/"+id,
-                            success: function(response){
-                                swal({
-                                    title: response.status,
-                                    text: response.status_text,
-                                    icon: response.status_icon,
-                                    button: "OK"
-                                    }).then((confirmed) =>{
-                                        window.location.reload();
-                                    });
-                                }
-                        });
-                    }
-                    else
-                    {
-                        swal("You have canceled on deleting this data");
-                    }
-            });
-        });
-    });
-</script>
 </body>
 </html>
